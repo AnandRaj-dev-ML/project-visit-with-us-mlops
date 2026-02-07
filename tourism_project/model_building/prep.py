@@ -17,7 +17,7 @@ df = pd.read_csv(DATASET_PATH)
 print("Dataset loaded successfully.")
 
 # Drop the unique identifier
-df.drop(columns=['Sl'], inplace=True)
+# df.drop(columns=['Sl'], inplace=True)
 
 # Drop the unique identifier
 df.drop(columns=['CustomerID'], inplace=True)
