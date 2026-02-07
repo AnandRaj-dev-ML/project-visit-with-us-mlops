@@ -62,9 +62,7 @@ preprocessor = make_column_transformer(
 
 # Define base XGBoost model
 xgb_model = xgb.XGBClassifier(scale_pos_weight=class_weight, random_state=42)
-
-# Define hyperparameter grid
-  param_grid = {
+param_grid = {
      'xgbclassifier__n_estimators': [50, 75, 100],
      'xgbclassifier__max_depth': [2, 3, 4],
      'xgbclassifier__colsample_bytree': [0.4, 0.5, 0.6],
