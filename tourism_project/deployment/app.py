@@ -7,14 +7,18 @@ import joblib
 model_path = hf_hub_download(repo_id="Rajanan/model-visit-with-us-mlops", filename="best_model_v1.joblib")
 model = joblib.load(model_path)
 
-# Streamlit UI for Machine Failure Prediction
+# Streamlit application for predicting customer purchase
+# of the Wellness Tourism Package.
+
 st.title("Tourism Package Prediction App")
 st.write("""
 This application predicts the likelihood of a Tourism Product Taken based on its operational parameters.
 Please enter the specifiction data below to get a prediction.
 """)
 
-# User Input
+# Collect user inputs.
+# Input features and value ranges are aligned with the training dataset.
+
 age = st.number_input("Age", min_value=18, max_value=61, value=37)
 type_of_contact = st.selectbox("Type of Contact", ["Self Enquiry", "Company Invited"])
 city_tier = st.selectbox("City Tier", [1, 2, 3])
@@ -34,7 +38,9 @@ num_children_visiting = st.selectbox("Number of Children Visiting", [0, 1, 2,3])
 designation = st.selectbox("Designation", ["Executive", "Manager", "Senior Manager", "AVP", "VP"])
 monthly_income = st.number_input("Monthly Income (₹)", min_value=1000, max_value=98678, value=22000, step=1000)
 
-# Assemble input into DataFrame
+# Assemble user inputs into a DataFrame that matches
+# the feature schema used during model training.
+
 input_data = pd.DataFrame([{
     'Age': age,
     'TypeofContact': type_of_contact,
@@ -56,6 +62,9 @@ input_data = pd.DataFrame([{
     'MonthlyIncome': monthly_income
 }])
 
+# Trigger prediction using the trained model pipeline.
+# The model outputs a binary classification:
+# 1 → Product Taken, 0 → Product Not Taken.
 
 if st.button("Predict Product "):
     prediction = model.predict(input_data)[0]

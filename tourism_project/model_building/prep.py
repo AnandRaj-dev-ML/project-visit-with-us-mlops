@@ -17,17 +17,12 @@ df = pd.read_csv(DATASET_PATH)
 print("Dataset loaded successfully.")
 
 # Drop the unique identifier
-#df.drop(columns=['Sl'], inplace=True)
-
-# Drop the unique identifier
 df.drop(columns=['CustomerID'], inplace=True)
 
 # Clean
 
 df['Occupation'] = df['Occupation'].replace('Free Lancer', 'Small Business')
-
 df['MaritalStatus'] = df['MaritalStatus'].replace('Unmarried', 'Single')
-
 df['Gender'] = df['Gender'].replace('Fe Male', 'Female')
 
 categorical_features = ['TypeofContact',
@@ -37,28 +32,17 @@ categorical_features = ['TypeofContact',
                         'MaritalStatus',
                         'Designation']
 
+# Encode categorical features into numeric form
+# to create ML-ready datasets for downstream training.
+# This step performs basic encoding and does not assume
+# any specific model architecture.
+# Note: Advanced preprocessing (scaling and one-hot encoding)
+# is applied later within the production training pipeline.
 
-# Encoding based on alphabetical order, does not take hirerchy into account, fine for xgboost
 label_encoders = {}
 
 for col in categorical_features:
     df[col] = LabelEncoder().fit_transform(df[col])
-
-# One-hot encode 'Type' and scale numeric features
-numeric_features = [
-    'Age',
-    'CityTier',
-    'DurationOfPitch',
-    'NumberOfPersonVisiting',
-    'NumberOfFollowups',
-    'PreferredPropertyStar',
-    'NumberOfTrips',
-    'Passport',
-    'PitchSatisfactionScore',
-    'OwnCar',
-    'NumberOfChildrenVisiting',
-    'MonthlyIncome'
-]
 
 target_col = 'ProdTaken'
 

@@ -40,8 +40,10 @@ Xtest['Occupation'] = Xtest['Occupation'].replace('Free Lancer', 'Small Business
 Xtest['MaritalStatus'] = Xtest['MaritalStatus'].replace('Unmarried', 'Single')
 Xtest['Gender'] = Xtest['Gender'].replace('Fe Male', 'Female') # Data Quality issue
 
-
-# 2. Define feature lists — keep it simple for XGBoost
+# Define numerical and categorical feature groups.
+# These feature lists are used to configure the preprocessing
+# pipeline consistently for training and inference.
+ 
 numeric_features = ['Age', 'CityTier', 'DurationOfPitch', 'NumberOfPersonVisiting',
                     'NumberOfFollowups', 'PreferredPropertyStar', 'NumberOfTrips',
                     'Passport', 'PitchSatisfactionScore', 'OwnCar',
@@ -53,6 +55,11 @@ categorical_features = ['TypeofContact', 'Occupation', 'Gender',
 # Set the clas weight to handle class imbalance
 class_weight = ytrain.value_counts()[0] / ytrain.value_counts()[1]
 class_weight
+
+# Production preprocessing pipeline.
+# All feature transformations are encapsulated inside the model pipeline
+# to guarantee identical preprocessing during training, evaluation,
+# and inference across CI/CD and deployment environments.
 
 # Define the preprocessing steps
 preprocessor = make_column_transformer(
