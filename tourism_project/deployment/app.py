@@ -10,7 +10,7 @@ model = joblib.load(model_path)
 # Streamlit application for predicting customer purchase
 # of the Wellness Tourism Package.
 
-st.title("Tourism Package Prediction App")
+st.title("Tourism Package Prediction Application")
 st.write("""
 This application predicts the likelihood of a Tourism Product Taken based on its operational parameters.
 Please enter the specifiction data below to get a prediction.

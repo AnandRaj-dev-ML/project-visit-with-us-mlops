@@ -43,7 +43,7 @@ Xtest['Gender'] = Xtest['Gender'].replace('Fe Male', 'Female') # Data Quality is
 # Define numerical and categorical feature groups.
 # These feature lists are used to configure the preprocessing
 # pipeline consistently for training and inference.
- 
+
 numeric_features = ['Age', 'CityTier', 'DurationOfPitch', 'NumberOfPersonVisiting',
                     'NumberOfFollowups', 'PreferredPropertyStar', 'NumberOfTrips',
                     'Passport', 'PitchSatisfactionScore', 'OwnCar',
